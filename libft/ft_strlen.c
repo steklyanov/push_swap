@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 19:09:59 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/22 19:58:55 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/18 17:02:49 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ size_t		ft_strlen(const char *str)
 {
 	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
-	while (*str++)
-	{
+	while (str[i] != '\0')
 		i++;
-	}
 	return (i);
 }

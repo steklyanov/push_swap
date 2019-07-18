@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 11:20:12 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/29 12:08:31 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/18 16:52:04 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char				*ft_strnew(size_t size)
 	if ((p = malloc(size + 1)) == NULL)
 		return (NULL);
 	i = 0;
-	while (i < size + 1)
+	while (i < size)
 	{
 		p[i] = '\0';
 		i++;

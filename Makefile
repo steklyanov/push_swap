@@ -1,15 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/07/18 16:56:08 by mmraz             #+#    #+#              #
+#    Updated: 2019/07/18 16:56:11 by mmraz            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 NAME2 = checker
 
 CC = gcc $(FLAGS)
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 
 INCLUDES = ./includes/
 
-SRC =	push_swap_f.c arrjoin.c str_splitspaces.c \
-		push_swap.c
-SRC2 =	ft_atoi.c \
+SRC =	push_swap.c
+SRC2 =	push_swap_f.c arrjoin.c str_splitspaces.c \
 		checker.c						
 
 OBJ = $(SRC:.c=.o)
@@ -18,31 +29,25 @@ OBJ2 = $(SRC2:.c=.o)
 all: $(NAME) $(NAME2)
 
 $(NAME): $(OBJ)
-	@make -C ./libft/
-	@$(CC) -I$(INCLUDES) -c $(SRC)
-	@$(CC) $^ -L./libft/ -lft -o $@
-	@echo "$(NAME) created successfully"
+	make -C ./libft/
+	$(CC) -I$(INCLUDES) -c $(SRC)
+	$(CC) $^ -L./libft/ -lft -o $@
 
 $(NAME2): $(OBJ2)
-	@make -C ./libft/
-	@$(CC) -I$(INCLUDES) -c $(SRC2)
-	@$(CC) $^ -L./libft/ -lft -o $@
-	@echo "$(NAME2) created successfully"
+	make -C ./libft/
+	$(CC) -I$(INCLUDES) -c $(SRC2)
+	$(CC) $^ -L./libft/ -lft -o $@
 
 %.o: %.c
 	@$(CC) -o $@ -c $<
 
 clean:
-	@make clean -C ./libft/
-	@echo "Erasing .o files in Push_Swap..."
-	@rm -f $(OBJ) $(OBJ2)
-	@echo "Done."
+	make clean -C ./libft/
+	rm -f $(OBJ) $(OBJ2)
 
 fclean: clean
-	@make fclean -C ./libft/
-	@echo "Erasing $(NAME)..."
-	@rm -f $(NAME) $(NAME2)
-	@echo "Done."
+	make fclean -C ./libft/
+	rm -f $(NAME) $(NAME2)
 
 re: fclean all clean
 
