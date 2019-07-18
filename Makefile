@@ -6,7 +6,7 @@
 #    By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 16:56:08 by mmraz             #+#    #+#              #
-#    Updated: 2019/07/18 16:56:11 by mmraz            ###   ########.fr        #
+#    Updated: 2019/07/18 19:16:17 by mmraz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ FLAGS = -g -Wall -Werror -Wextra
 
 INCLUDES = ./includes/
 
-SRC =	push_swap.c
-SRC2 =	push_swap_f.c arrjoin.c str_splitspaces.c \
-		checker.c						
+SRC =	push_swap_f.c arrjoin.c str_splitspaces.c \
+		split_whitespaces_to_int.c ft_atoi_small.c push_swap.c
+SRC2 =	checker.c						
 
 OBJ = $(SRC:.c=.o)
 OBJ2 = $(SRC2:.c=.o)
