@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/05 19:37:11 by mmraz             #+#    #+#             */
+/*   Updated: 2018/12/06 06:55:12 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+{
+	t_list	*tmp;
+	t_list	*next;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	if (!alst || !(*alst))
+		return ;
+	tmp = *alst;
+	next = *alst;
+	if (del)
+	{
+		while (tmp != NULL)
+		{
+			next = tmp->next;
+			ft_lstdelone(&tmp, del);
+			tmp = next;
+		}
+		*alst = NULL;
+	}
+}

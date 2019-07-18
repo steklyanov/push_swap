@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/11/28 15:00:54 by mmraz             #+#    #+#             */
+/*   Updated: 2018/11/28 15:35:06 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	unsigned int	len1;
+	char			*res;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	res = (char*)malloc(sizeof(*res) * (len1 + ft_strlen(s2) + 1));
+	if (!res)
+		return (NULL);
+	ft_strcpy(res, s1);
+	ft_strcat(res, s2);
+	return (res);
+}

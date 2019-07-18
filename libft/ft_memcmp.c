@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/11/22 18:10:53 by mmraz             #+#    #+#             */
+/*   Updated: 2018/12/07 12:20:06 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+int					ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*c_arr1;
+	unsigned char	*c_arr2;
+	size_t			i;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	i = 0;
+	if (n == 0)
+		return (0);
+	c_arr1 = (unsigned char*)s1;
+	c_arr2 = (unsigned char*)s2;
+	while (*c_arr1 == *c_arr2 && ++i < n)
+	{
+		c_arr1++;
+		c_arr2++;
+	}
+	return ((int)*c_arr1 - *c_arr2);
+}

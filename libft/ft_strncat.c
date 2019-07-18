@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/11/23 11:23:15 by mmraz             #+#    #+#             */
+/*   Updated: 2018/11/26 19:51:47 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+char		*ft_strncat(char *dest, const char *append, size_t n)
+{
+	int		i;
+	size_t	q;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	i = 0;
+	q = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (append[q] != '\0' && q < n)
+	{
+		dest[i] = append[q];
+		i++;
+		q++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

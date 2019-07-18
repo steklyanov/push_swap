@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/11/22 16:41:06 by mmraz             #+#    #+#             */
+/*   Updated: 2018/11/26 19:49:32 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+void					*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t				i;
+	unsigned char		*ptr;
+	const unsigned char	*ptr2;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	ptr = (unsigned char*)dst;
+	ptr2 = (unsigned char*)src;
+	i = 0;
+	if (ptr2 < ptr)
+		while (++i <= len)
+			ptr[len - i] = ptr2[len - i];
+	else
+		while (len-- > 0)
+			*(ptr++) = *(ptr2++);
+	return (dst);
+}

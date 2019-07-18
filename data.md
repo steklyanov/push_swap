@@ -11,4 +11,5 @@ https://learnc.info
 
 ## TIPS
 
+https://github.com/wliu16/Push-Swap/blob/master/Makefile
 https://github.com/Melroune/Push_swap

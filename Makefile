@@ -1,36 +1,49 @@
-CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
-HEAD_PUSH = push_swap.h
-HEAD_CHECKER = checker.h
-NAME_PUSH = push_swap
-NAME_CHECKER = checker
-SRC_PUSH = push_swap.c
-SRC_CHECKER = ft_atoi.c checker.c 
-OBJECTS_PUSH = $(SRC_PUSH:.c=.o)
-OBJECTS_CHECKER = $(SRC_CHECKER:.c=.o)
+NAME = push_swap
+NAME2 = checker
 
-all: $(NAME_CHECKER)
+CC = gcc $(FLAGS)
 
-# $(NAME): checker push_swap
+FLAGS = -Wall -Werror -Wextra
 
-.c.o: $(HEAD_PUSH)
-	$(CC) $(CFLAGS) -o $@ -c $<
+INCLUDES = ./includes/
+
+SRC =	push_swap_f.c arrjoin.c str_splitspaces.c \
+		push_swap.c
+SRC2 =	ft_atoi.c \
+		checker.c						
+
+OBJ = $(SRC:.c=.o)
+OBJ2 = $(SRC2:.c=.o)
+
+all: $(NAME) $(NAME2)
+
+$(NAME): $(OBJ)
+	@make -C ./libft/
+	@$(CC) -I$(INCLUDES) -c $(SRC)
+	@$(CC) $^ -L./libft/ -lft -o $@
+	@echo "$(NAME) created successfully"
+
+$(NAME2): $(OBJ2)
+	@make -C ./libft/
+	@$(CC) -I$(INCLUDES) -c $(SRC2)
+	@$(CC) $^ -L./libft/ -lft -o $@
+	@echo "$(NAME2) created successfully"
+
+%.o: %.c
+	@$(CC) -o $@ -c $<
 
 clean:
-	/bin/rm -f $(OBJECTS_PUSH) $(OBJECTS_CHECKER)
+	@make clean -C ./libft/
+	@echo "Erasing .o files in Push_Swap..."
+	@rm -f $(OBJ) $(OBJ2)
+	@echo "Done."
 
 fclean: clean
-	/bin/rm -f $(NAME_PUSH) $(NAME_CHECKER)
+	@make fclean -C ./libft/
+	@echo "Erasing $(NAME)..."
+	@rm -f $(NAME) $(NAME2)
+	@echo "Done."
 
-# re: fclean all
+re: fclean all clean
 
-# checker: $(OBJECTS_CHECKER)
-# 	$(CC) -o $(NAME_CHECKER) -c  -o $< $@
-
-# push_swap: $(OBJECTS_PUSH)
-# 	$(CC) -o $(NAME_PUSH) -c $< -o $@
-
-$(NAME_CHECKER): $(OBJECTS_CHECKER)
-	$(CC) $(FLAGS) $(HEAD_PUSH) -c $(SRC_CHECKER) -o $@
-
-.PHONY: clean fclean all re checker push_swap
+.PHONY: all, clean, fclean, re

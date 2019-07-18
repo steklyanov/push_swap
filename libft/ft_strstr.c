@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 16:27:35 by mmraz            ###   ########.fr       */
+/*   Created: 2018/11/24 13:59:13 by mmraz             #+#    #+#             */
+/*   Updated: 2018/11/26 19:53:00 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
+char	*ft_strstr(const char *str1, const char *str2)
+{
+	int	i;
+	int	j;
 
-#include <stdlib.h>
-#include "libft/libft.h"
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-char	*ft_arrjoin(char **arr, int len);
-int     ft_isspace(char s);
-char	**ft_strsplitspaces(char const *s);
-size_t	str_calc(char const *s);
-
-#endif
+	i = 0;
+	if (str2[0] == '\0')
+		return ((char*)str1);
+	while (str1[i] != '\0')
+	{
+		j = 0;
+		while (str1[i + j] == str2[j])
+		{
+			if (str2[j + 1] == '\0')
+				return ((char*)&str1[i]);
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
+}
