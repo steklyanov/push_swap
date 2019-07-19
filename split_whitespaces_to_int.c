@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 17:55:14 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 19:39:01 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/19 16:18:40 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	get_wrds_cnt(char const *s)
 	return (result);
 }
 
-int	    	*ft_strsplit_to_int(char const *s)
+t_stack	    	*ft_strsplit_to_int(char const *s)
 {
-	int     *result;
+	t_stack	*result;
 	int		index;
 	int		z;
 	int		len;
@@ -43,17 +43,27 @@ int	    	*ft_strsplit_to_int(char const *s)
 	z = 0;
 	if (!s)
 		return (NULL);
-	len = get_wrds_cnt(s) + 1;
-	if (!(result = (int *)malloc(sizeof(int *) * len)))
-		return (NULL);
+	len = get_wrds_cnt(s);
+	result = allocate_memory(len);
 	while (s[index])
 	{
 		if (s[index] == ' ')
 			index++;
-        result[z++] = ft_atoi_small(&s[index]);
+        result->stack[z++] = ft_atoi_small(&s[index]);
 		while (s[index] && s[index] != ' ')
 			index++;
 	}
-	result[z] = 0;
+	return (result);
+}
+
+t_stack		*allocate_memory(int len)
+{
+	t_stack	*result;
+
+	if (!(result = malloc(sizeof(t_stack))))
+		return (NULL);
+	if (!(result->stack = (int *)malloc(sizeof(int *) * len)))
+		return (NULL);
+	result->len = len;
 	return (result);
 }
