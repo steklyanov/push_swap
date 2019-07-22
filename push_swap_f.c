@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:50:21 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/22 15:56:16 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/22 18:15:47 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ void    print_stack(t_stack *stack_a, t_stack *stack_b)
     i = 0;
     printf("\n");
     printf("Stack B, len = %d\n", stack_b->len);
-    while(i < stack_b->len)
+    if (stack_b->len > 0)
     {
-        printf("%d ", stack_b->stack[i]);
-        i++;
-    };
-    printf("\n");
+        while(i < stack_b->len)
+        {
+            printf("%d ", stack_b->stack[i]);
+            i++;
+        };
+        printf("\n");
+    }
+
 }
