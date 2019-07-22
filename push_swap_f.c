@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:50:21 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/19 16:19:26 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/22 15:56:16 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void    print_stack(t_stack *stack_a, t_stack *stack_b)
         printf("%d ", stack_b->stack[i]);
         i++;
     };
+    printf("\n");
 }
