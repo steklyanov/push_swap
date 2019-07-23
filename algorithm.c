@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/22 19:41:51 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/23 14:17:45 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    push_to_second_stack(t_stack *stack_a, t_stack *stack_b)
     }
 }
 
-int sort_three(t_stack *stack_a)
+int choose_sort_three(t_stack *stack_a)
 {
     // if (stack_a->stack[0] > stack_a->stack[1] && stack_a->stack[1] > stack_a->stack[2])
     if (stack_a->stack[0] > stack_a->stack[1] && stack_a->stack[1] < stack_a->stack[2])
@@ -60,12 +60,35 @@ int sort_three(t_stack *stack_a)
     return (0); 
 }
 
-// int count_moves_to_put(t_stack *stack_a, t_stack *stack_b)
-// {
-//     int counter;
+void    sort_three(t_stack *stack_a)
+{
+    int result;
 
-//     counter = 0;
-//     stack_a = stack_a;
-//     stack_b = stack_b;
-//     return (0);
-// }
+    result = choose_sort_three(stack_a);
+    if (result == 1)
+    {
+        rotate(stack_a);
+        swap_one(stack_a);
+    }
+    else if (result == 2)
+        reverse_rotate(stack_a);
+    else if (result == 3)
+    {
+        reverse_rotate(stack_a);
+        reverse_rotate(stack_a);
+    }
+    else if (result == 4)
+        swap_one(stack_a);
+    else if (result == 5)
+        rotate(stack_a);
+}
+
+int count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem)
+{
+    int counter;
+
+    counter = 0;
+    stack_a = stack_a;
+    stack_b = stack_b;
+    return (0);
+}
