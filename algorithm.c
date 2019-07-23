@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/23 14:46:41 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/23 14:59:13 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int choose_sort_three(t_stack *stack_a)
     return (0); 
 }
 
+//  TODO: check all possible varables!!!
 void    sort_three(t_stack *stack_a)
 {
     int result;
@@ -79,7 +80,7 @@ void    sort_three(t_stack *stack_a)
         reverse_rotate(stack_a);
     else if (result == 3)
     {
-        reverse_rotate(stack_a);
+        swap_one(stack_a);
         reverse_rotate(stack_a);
     }
     else if (result == 4)
@@ -88,8 +89,8 @@ void    sort_three(t_stack *stack_a)
         rotate(stack_a);
 }
 
-// int count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem)
-// {
+int count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem)
+{
     //  Дается номер элемента из стека Б и для него узнается минимальное
     // количество операциий для помещения в нужную часть 
     // стека А через верх или через низ
@@ -102,8 +103,5 @@ void    sort_three(t_stack *stack_a)
     // Один вниз другой вверх
 //     int counter;
 
-//     counter = 0;
-//     stack_a = stack_a;
-//     stack_b = stack_b;
-//     return (0);
-// }
+
+}
