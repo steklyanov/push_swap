@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/24 14:55:42 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/24 19:09:33 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int choose_sort_three(t_stack *stack_a)
     }
     return (0); 
 }
-
+ 
 void    sort_three(t_stack *stack_a)
 {
     int result;
@@ -69,90 +69,110 @@ void    sort_three(t_stack *stack_a)
         swap_one(stack_a);
 }
 
-// t_moves *create_list()
-// {
-//     t_moves *moves;
-
-//     if (!(moves = (t_moves*)malloc(sizeof(t_moves))))
-// 		return (NULL);
-//     moves->next = NULL;
-//     return (moves);
-// }
-
-// t_moves *dealer(t_stack *stack_a, t_stack *stack_b)
-// {
-//     t_moves *moves;
-
-//     moves = create_list();
-//     while (stack_b->len > 0)
-//     {
-//         push_to_stack
-//     }
-// }
-
 void    dealer(t_stack *stack_a, t_stack *stack_b)
 {
     int index;
-    int min;
-    int tmp;
+    t_solution tmp;
+    t_solution  min_sol;
     int min_index;
 
-    tmp = 0;
+    tmp.len = 0;
     min_index = 0;
     while (stack_b->len > 0)
     {
         index = 0;
-        min = 100;
+        min_sol.len = 100;
         while(index < stack_b->len)
         {
             tmp = count_moves_to_put(stack_a, stack_b, index);
-            if (tmp < min)
+            if (tmp.len < min_sol.len)
             {
-                min = tmp;
+                min_sol = tmp;
                 min_index = index;
             }
+            index++;
         }
-        // push_to_stack(min_index);
+        push_to_stack(min_index, &min_sol, stack_a, stack_b);
     }
 }
 
-// int     push_to_stack(int index);
-// {
-// Эта функция изменяет стек и печатает в консоль
-
-
-// }
-
-// int find_pos_in_a(t_stack *stack_a, int elem)
-// {
-//     int index;
-
-//     index = 0;
-//     while (index < stack_a->len)
-//     {
-//         if (stack_a->stack[index] < 
-//     }
-// }
-
-int count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem)
+void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack *stack_b)
 {
-    // Эта функция просто считает количество необходимых операций
+    if (min_sol->sol_nmbr == 1)
+        scenario_1(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 2)
+        scenario_2(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 3)
+        scenario_3(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 4)
+        scenario_4(stack_a, stack_b, index);
+    stack_b->len--;
+    stack_a->len++;
+}
 
+int find_pos_in_a(t_stack *stack_a, int elem)
+{
+    int index;
 
-    if (stack_b->len / elem > 0.5)
-        stack_a->len = 7;
+    index = 0;
+    while (index < stack_a->len)
+    {
+        if (stack_a->stack[index] > elem)
+            return (index);
+        index++;
+    }
+    return (index);
+}
 
-    //  Дается номер элемента из стека Б и для него узнается минимальное
-    // количество операциий для помещения в нужную часть 
-    // стека А через верх или через низ
-    // 1. Просчпет как быстрее через верх или низ поднять элемент
-    // 2. Просчет нужной позиции в стеке
-    // 3. примерка через верх и низ  собьединением второго стека:
-    //  Один вверх другой вниз 
-    //  Оба вверх 
-    // Оба вниз
-    // Один вниз другой вверх
-//     int counter;
+t_solution count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int index)
+{
+    t_solution sol;
+    int ra;
+    printf("index - %d   number - %d\n", index, stack_b->stack[index]);
+    printf("position looking for = %d\n", find_pos_in_a(stack_a, stack_b->stack[index]));
+    ra = find_pos_in_a(stack_a, stack_b->stack[index]);
 
-    return (0);
+    printf("ra = %d\n", ra);
+    printf("rra = %d\n", (stack_a->len - ra));
+    printf("rb = %d\n", index);
+    printf("rrb = %d\n", (stack_b->len - index));
+
+    sol.res_1 = (index > ra) ? index + ra : 2 * ra; // ra and rb
+    sol.res_2 = ((stack_b->len - index) > (stack_a->len - ra)) ? (stack_b->len - index) + (stack_a->len - ra): 2 * (stack_a->len - ra) - (stack_b->len - index); // rra and rrb
+    sol.res_3 = index + 2 * (stack_a->len - ra); // rra and rb
+    sol.res_4 = (stack_b->len - index) + 2 * ra; // ra and rrb
+
+    printf("res1 = %d\n", sol.res_1);
+    printf("res2 = %d\n", sol.res_2);
+    printf("res3 = %d\n", sol.res_3);
+    printf("res4 = %d\n", sol.res_4);
+    ft_fill_min(&sol);
+    printf("sol nmbr = %d\n", sol.sol_nmbr);
+    printf("sol len = %d\n", sol.len);
+// НЕ уверен, что она отрабатывает корректно!!
+    return (sol);
+}
+
+void      ft_fill_min(t_solution *sol)
+{
+    if (sol->res_1 < sol->res_2 && sol->res_1 < sol->res_3 && sol->res_1 < sol->res_4)
+    {
+        sol->len = sol->res_1;
+        sol->sol_nmbr = 1;
+    }
+    else if (sol->res_2 < sol->res_3 && sol->res_2 < sol->res_4)
+    {
+        sol->len = sol->res_2;
+        sol->sol_nmbr = 2;
+    }
+    else if (sol->res_3 < sol->res_4)
+    {
+        sol->len = sol->res_3;
+        sol->sol_nmbr = 3;
+    }
+    else
+    {
+        sol->len = sol->res_4;
+        sol->sol_nmbr = 4;
+    }
 }

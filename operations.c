@@ -6,28 +6,32 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:46:34 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/23 14:43:17 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/24 20:09:54 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    swap_one(t_stack *stack_a)
+void    swap_one(t_stack *stack_a, int rep)
 {
     int tmp_a;
 
-    if (stack_a->stack[0] && stack_a->stack[1])
+    if (rep)
     {
-        tmp_a = stack_a->stack[0];
-	    stack_a->stack[0] = stack_a->stack[1];
-	    stack_a->stack[1] = tmp_a;
+        if (stack_a->stack[0] && stack_a->stack[1])
+        {
+            tmp_a = stack_a->stack[0];
+            stack_a->stack[0] = stack_a->stack[1];
+            stack_a->stack[1] = tmp_a;
+        }
     }
+    swap_one(stack_a, rep - 1);
 }
 
-void    swap_both(t_stack *stack_a, t_stack *stack_b)
+void    swap_both(t_stack *stack_a, t_stack *stack_b, int rep)
 {
-    swap_one(stack_a);
-    swap_one(stack_b);
+    swap_one(stack_a, rep);
+    swap_one(stack_b, rep);
 }
 
 void    push_to(t_stack *stack_a, t_stack *stack_b)
@@ -57,23 +61,27 @@ void    push_to(t_stack *stack_a, t_stack *stack_b)
         }
 }
 
-void    rotate(t_stack *stack)
+void    rotate(t_stack *stack, int rep)
 {
     int tmp;
     int index;
 
-    index  = 0;
-    tmp = stack->stack[0];
-    while(index <= stack->len - 2)
+    if (rep)
     {
-        stack->stack[index] = stack->stack[index + 1];
-        index++; 
+        index  = 0;
+        tmp = stack->stack[0];
+        while(index <= stack->len - 2)
+        {
+            stack->stack[index] = stack->stack[index + 1];
+            index++; 
+        }
+        stack->stack[index] = tmp; 
     }
-    stack->stack[index] = tmp;
+    rotate(stack, rep - 1);
 }
 
-void    rotate_both(t_stack *stack_a, t_stack *stack_b)
+void    rotate_both(t_stack *stack_a, t_stack *stack_b, int rep)
 {
-    rotate(stack_a);
-    rotate(stack_b);
+    rotate(stack_a, rep);
+    rotate(stack_b, rep);
 }

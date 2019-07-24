@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/23 14:43:17 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/24 18:31:37 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
                 tmp = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]), str_calc(argv[index])));
                 tmp = ft_strjoin(tmp, " ");
                 result = tmp;
-
+ 
                 // free(tmp);
             }
             else
@@ -52,6 +52,8 @@ int main(int argc, char **argv)
             print_stack(stack_a, stack_b);
             sort_three(stack_a);
             print_stack(stack_a, stack_b);
+            count_moves_to_put(stack_a, stack_b, 3);
+            // printf("result = %d", );
         }
         else
         {
