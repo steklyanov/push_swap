@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:46:34 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/24 20:09:54 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/26 16:35:37 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void    swap_one(t_stack *stack_a, int rep)
             stack_a->stack[0] = stack_a->stack[1];
             stack_a->stack[1] = tmp_a;
         }
+        swap_one(stack_a, rep - 1);
     }
-    swap_one(stack_a, rep - 1);
 }
 
 void    swap_both(t_stack *stack_a, t_stack *stack_b, int rep)
@@ -75,9 +75,9 @@ void    rotate(t_stack *stack, int rep)
             stack->stack[index] = stack->stack[index + 1];
             index++; 
         }
-        stack->stack[index] = tmp; 
+        stack->stack[index] = tmp;
+        rotate(stack, rep - 1);
     }
-    rotate(stack, rep - 1);
 }
 
 void    rotate_both(t_stack *stack_a, t_stack *stack_b, int rep)
