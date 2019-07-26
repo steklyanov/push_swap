@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/26 17:17:28 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/26 18:37:51 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void    sort_three(t_stack *stack_a)
     result = choose_sort_three(stack_a);
     printf("result %d\n", result);
     if (result == 1)
-        reverse_rotate(stack_a);
+        reverse_rotate(stack_a, 1);
     else if (result == 2)
     {
         swap_one(stack_a, 1);
@@ -61,7 +61,7 @@ void    sort_three(t_stack *stack_a)
     else if (result == 3)
     {
         swap_one(stack_a, 1);
-        reverse_rotate(stack_a);
+        reverse_rotate(stack_a, 1);
     }
     else if (result == 4)
         rotate(stack_a, 1);
@@ -101,14 +101,14 @@ void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack
     printf("______PUSH TO STACK_______\n");
     printf("min sol = %d\n", min_sol->sol_nmbr);
     printf("index = %d\n", index);
-    // if (min_sol->sol_nmbr == 1)
-    //     scenario_1(stack_a, stack_b, index);
-    // else if (min_sol->sol_nmbr == 2)
-    //     scenario_2(stack_a, stack_b, index);
-    // else if (min_sol->sol_nmbr == 3)
-    //     scenario_3(stack_a, stack_b, index);
-    // else if (min_sol->sol_nmbr == 4)
-    //     scenario_4(stack_a, stack_b, index);
+    if (min_sol->sol_nmbr == 1)
+        scenario_1(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 2)
+        scenario_2(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 3)
+        scenario_3(stack_a, stack_b, index);
+    else if (min_sol->sol_nmbr == 4)
+        scenario_4(stack_a, stack_b, index);
     stack_b->len--;
     stack_a->len++;
 }

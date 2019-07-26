@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/26 16:42:04 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/26 18:23:07 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void    push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack 
 void    rotate(t_stack *stack, int rep);
 void    rotate_both(t_stack *stack_a, t_stack *stack_b, int rep);
 void    print_stack(t_stack *stack_a, t_stack *stack_b);
-void	reverse_rotate(t_stack *stack);
-void	reverse_rotate_both(t_stack *stack_a, t_stack *stack_b);
+void	reverse_rotate(t_stack *stack, int rep);
+void	reverse_rotate_both(t_stack *stack_a, t_stack *stack_b, int rep);
 void	push_to_second_stack(t_stack *stack_a, t_stack *stack_b);
 void    ft_print(char *comma, int rep);
 void	scenario_1(t_stack *stack_a, t_stack *stack_b, int index);
