@@ -61,7 +61,7 @@ void    push_to(t_stack *stack_a, t_stack *stack_b)
         }
 }
 
-void    rotate(t_stack *stack, int rep)
+void     rotate(t_stack *stack, int rep)
 {
     int tmp;
     int index;

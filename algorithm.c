@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/26 18:37:51 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/30 15:10:36 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void    sort_three(t_stack *stack_a)
     int result;
 
     result = choose_sort_three(stack_a);
-    printf("result %d\n", result);
     if (result == 1)
         reverse_rotate(stack_a, 1);
     else if (result == 2)
@@ -93,11 +92,14 @@ void    dealer(t_stack *stack_a, t_stack *stack_b)
             index++;
         }
         push_to_stack(min_index, &min_sol, stack_a, stack_b);
+        print_stack(stack_a, stack_b);
     }
+    reverse_rotate(stack_b, 3);
 }
 
 void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack *stack_b)
 {
+    print_stack(stack_a, stack_b);
     printf("______PUSH TO STACK_______\n");
     printf("min sol = %d\n", min_sol->sol_nmbr);
     printf("index = %d\n", index);
@@ -109,8 +111,6 @@ void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack
         scenario_3(stack_a, stack_b, index);
     else if (min_sol->sol_nmbr == 4)
         scenario_4(stack_a, stack_b, index);
-    stack_b->len--;
-    stack_a->len++;
 }
 
 int find_pos_in_a(t_stack *stack_a, int elem)
@@ -131,29 +131,29 @@ t_solution count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int index)
 {
     t_solution sol;
     int ra;
-    printf("____________ COUNT MOVES TO PUTIN VV____________");
-    printf("index - %d   number - %d\n", index, stack_b->stack[index]);
-    printf("position looking for = %d\n", find_pos_in_a(stack_a, stack_b->stack[index]));
+    // printf("____________ COUNT MOVES TO PUTIN VV____________");
+    // printf("index - %d   number - %d\n", index, stack_b->stack[index]);
+    // printf("position looking for = %d\n", find_pos_in_a(stack_a, stack_b->stack[index]));
     ra = find_pos_in_a(stack_a, stack_b->stack[index]);
 
-    printf("ra = %d\n", ra);
-    printf("rra = %d\n", (stack_a->len - ra));
-    printf("rb = %d\n", index);
-    printf("rrb = %d\n", (stack_b->len - index));
+    // printf("ra = %d\n", ra);
+    // printf("rra = %d\n", (stack_a->len - ra));
+    // printf("rb = %d\n", index);
+    // printf("rrb = %d\n", (stack_b->len - index));
 
     sol.res_1 = (index > ra) ? index + ra : 2 * ra; // ra and rb
     sol.res_2 = ((stack_b->len - index) > (stack_a->len - ra)) ? (stack_b->len - index) + (stack_a->len - ra): 2 * (stack_a->len - ra) - (stack_b->len - index); // rra and rrb
     sol.res_3 = index + 2 * (stack_a->len - ra); // rra and rb
     sol.res_4 = (stack_b->len - index) + 2 * ra; // ra and rrb
 
-    printf("res1 = %d\n", sol.res_1);
-    printf("res2 = %d\n", sol.res_2);
-    printf("res3 = %d\n", sol.res_3);
-    printf("res4 = %d\n", sol.res_4);
+    // printf("res1 = %d\n", sol.res_1);
+    // printf("res2 = %d\n", sol.res_2);
+    // printf("res3 = %d\n", sol.res_3);
+    // printf("res4 = %d\n", sol.res_4);
     ft_fill_min(&sol);
     printf("sol nmbr = %d\n", sol.sol_nmbr);
-    printf("sol len = %d\n", sol.len);
-// НЕ уверен, что она отрабатывает корректно!!
+    // printf("sol len = %d\n", sol.len);
+    // НЕ уверен, что она отрабатывает корректно!!
     return (sol);
 }
 
