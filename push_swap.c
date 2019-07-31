@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/30 14:02:01 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/31 17:28:44 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int main(int argc, char **argv)
         {
             stack_b = allocate_memory(stack_a->len);
             stack_b->len = 0;
-            print_stack(stack_a, stack_b);
+            // print_stack(stack_a, stack_b);
             push_to_second_stack(stack_a, stack_b);
             sort_three(stack_a);
-            print_stack(stack_a, stack_b);
+            // print_stack(stack_a, stack_b);
             dealer(stack_a, stack_b);
             print_stack(stack_a, stack_b);
             // printf("result = %d", );

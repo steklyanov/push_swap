@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/30 14:31:12 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/31 16:59:01 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	scenario_1(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_2(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_3(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_4(t_stack *stack_a, t_stack *stack_b, int index);
+void    rotate_to_norme(t_stack *stack_a);
 // int		count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem);
 t_stack	*allocate_memory(int len);
 t_stack	*ft_strsplit_to_int(char const *s);

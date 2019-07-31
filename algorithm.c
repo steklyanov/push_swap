@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/31 15:55:13 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/31 17:28:26 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,34 @@ void    sort_three(t_stack *stack_a)
 
     result = choose_sort_three(stack_a);
     if (result == 1)
+    {
         reverse_rotate(stack_a, 1);
+        ft_print("rra\n", 1);
+    }
     else if (result == 2)
     {
         swap_one(stack_a, 1);
         rotate(stack_a, 1);
+        ft_print("sa\n", 1);
+        ft_print("ra\n", 1);
     }
-
     else if (result == 3)
     {
         swap_one(stack_a, 1);
         reverse_rotate(stack_a, 1);
+        ft_print("sa\n", 1);
+        ft_print("rra\n", 1);
     }
     else if (result == 4)
+    {
         rotate(stack_a, 1);
+        ft_print("ra\n", 1);
+    }
     else if (result == 5)
+    {
         swap_one(stack_a, 1);
+        ft_print("sa\n", 1);
+    }
 }
 
 void    dealer(t_stack *stack_a, t_stack *stack_b)
@@ -92,17 +104,40 @@ void    dealer(t_stack *stack_a, t_stack *stack_b)
             index++;
         }
         push_to_stack(min_index, &min_sol, stack_a, stack_b);
-        print_stack(stack_a, stack_b);
+        // print_stack(stack_a, stack_b);
     }
-    reverse_rotate(stack_b, 3);
+    rotate_to_norme(stack_a);
+}
+
+void    rotate_to_norme(t_stack *stack_a)
+{
+    int index;
+
+    index = 0;
+    while (index < stack_a->len)
+    {
+        if (stack_a->stack[index] > stack_a->stack[index + 1])
+            break;
+        index++;
+    }
+    index++;
+    if (stack_a->len / index > 0.5)
+    {
+        reverse_rotate(stack_a, stack_a->len - index);
+    }
+    else
+    {
+        rotate(stack_a, index);
+    }
+    
 }
 
 void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack *stack_b)
 {
-    print_stack(stack_a, stack_b);
-    printf("______PUSH TO STACK_______\n");
-    printf("min sol = %d\n", min_sol->sol_nmbr);
-    printf("index = %d\n", index);
+    // print_stack(stack_a, stack_b);
+    // printf("______PUSH TO STACK_______\n");
+    // printf("min sol = %d\n", min_sol->sol_nmbr);
+    // printf("index = %d\n", index);
     if (min_sol->sol_nmbr == 1)
         scenario_1(stack_a, stack_b, index);
     else if (min_sol->sol_nmbr == 2)
@@ -116,21 +151,22 @@ void     push_to_stack(int index, t_solution *min_sol, t_stack *stack_a, t_stack
 int find_pos_in_a(t_stack *stack_a, int elem)
 {
     int index;
-    int res;
+    // int res;
 
     index = 0;
-    res = 0;
+    // res = 0;
     while (index < stack_a->len)
     {
-        if (elem > stack_a->stack[index])
+        if (stack_a->stack[index] > stack_a->stack[index + 1])
         {
-            res = index + 1;
-            if (elem < stack_a->stack[index + 1])
+            if (elem > stack_a->stack[index] || elem < stack_a->stack[index + 1])
                 return (index + 1);
         }
+        else if (elem > stack_a->stack[index] && elem < stack_a->stack[index + 1])
+            return (index + 1);
         index++;
     }
-    return (res);
+    return (0);
 }
 
 t_solution count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int index)
@@ -140,32 +176,32 @@ t_solution count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int index)
     int rra;
     int rb;
     int rrb;
-    printf("____________ COUNT MOVES TO PUTIN VV____________");
-    printf("index - %d   number - %d\n", index, stack_b->stack[index]);
-    printf("position looking for = %d\n", find_pos_in_a(stack_a, stack_b->stack[index]));
-    print_stack(stack_a, stack_b);
+    // printf("____________ COUNT MOVES TO PUTIN VV____________");
+    // printf("index - %d   number - %d\n", index, stack_b->stack[index]);
+    // printf("position looking for = %d\n", find_pos_in_a(stack_a, stack_b->stack[index]));
+    // print_stack(stack_a, stack_b);
     ra = find_pos_in_a(stack_a, stack_b->stack[index]);
     rb = index;
     rra = stack_a->len - ra;
     rrb = stack_b->len - index;
 
-    printf("ra = %d\n", ra);
-    printf("rra = %d\n", rra);
-    printf("rb = %d\n", rb);
-    printf("rrb = %d\n", rrb);
+    // printf("ra = %d\n", ra);
+    // printf("rra = %d\n", rra);
+    // printf("rb = %d\n", rb);
+    // printf("rrb = %d\n", rrb);
 
     sol.res_1 = (ra > rb) ? ra : rb; // ra and rb
     sol.res_2 = (rra > rrb) ? rra : rrb; // rra and rrb
     sol.res_3 = rra + rb; // rra and rb
     sol.res_4 = rrb + ra; // ra and rrb
 
-    printf("res1 = %d\n", sol.res_1);
-    printf("res2 = %d\n", sol.res_2);
-    printf("res3 = %d\n", sol.res_3);
-    printf("res4 = %d\n", sol.res_4);
+    // printf("res1 = %d\n", sol.res_1);
+    // printf("res2 = %d\n", sol.res_2);
+    // printf("res3 = %d\n", sol.res_3);
+    // printf("res4 = %d\n", sol.res_4);
     ft_fill_min(&sol);
-    printf("sol nmbr = %d\n", sol.sol_nmbr);
-    printf("sol len = %d\n", sol.len);
+    // printf("sol nmbr = %d\n", sol.sol_nmbr);
+    // printf("sol len = %d\n", sol.len);
     // НЕ уверен, что она отрабатывает корректно!!
     return (sol);
 }
