@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:01:19 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/30 16:24:16 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/07/31 15:00:26 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,11 @@ void    scenario_2(t_stack *stack_a, t_stack *stack_b, int index)
     printf("%d\n", rrb);
     if (rrb < rra)
     {
-        printf("1");
         reverse_rotate(stack_a, rra - rrb);
         ft_print("rra\n", rra - rrb);
     }
     else if (rrb > rra)
     {
-        printf("2");
         reverse_rotate(stack_b, rrb - rra);
         ft_print("rrb\n", rrb - rra);
     }
