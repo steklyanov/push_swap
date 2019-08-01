@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/01 17:47:28 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/01 21:42:22 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int argc, char **argv)
             else
                 printf("Error\n");
         }
+        free(result);
     }
     else
         ft_print_usage();
@@ -53,18 +54,18 @@ char    *return_stack_string(int argc, char **argv)
 {
     char *result;
     int index;
-    char *tmp;
+    // char *tmp;
 
     index  = 1;
-    result = ft_strnew(1);
+    result = ft_strnew(0);
     while(argc > index)
     {
         if (validate(argv[index]))
         {
             //  Возможно нужно ft_strnew сделать внутри и после каждой операции делать ft_memdel;
-            tmp = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]), str_calc(argv[index])));
-            tmp = ft_strjoin(tmp, " ");
-            result = tmp;
+            result = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]), str_calc(argv[index])));
+            result = ft_strjoin(result, " ");
+            // result = tmp;
             // free(tmp);
         }
         else

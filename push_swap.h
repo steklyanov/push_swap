@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/01 20:24:39 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/01 20:30:32 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	scenario_1(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_2(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_3(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_4(t_stack *stack_a, t_stack *stack_b, int index);
+void    return_stack_string_2(int argc, char **argv);
 int		stack_operation(char *line);
 void    validate_operations(char **argv, int index, t_stack *stack_a, t_stack *stack_b);
 void    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b);
