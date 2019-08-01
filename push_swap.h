@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/31 16:59:01 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/01 17:47:20 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		ft_isdigit(int c);
 void	ft_print_usage();
 int		ft_check_equal(t_stack *stack);
 void    sort_three(t_stack *stack_a);
+void    main_operations(t_stack *stack_a, t_stack *stack_b);
+char    *return_stack_string(int argc, char **argv);
 void    dealer(t_stack *stack_a, t_stack *stack_b);
 t_solution		count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem);
 void      ft_fill_min(t_solution *sol);
