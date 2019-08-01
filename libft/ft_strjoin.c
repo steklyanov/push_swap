@@ -1,29 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 15:00:54 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/28 15:35:06 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/13 11:30:15 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/13 11:30:17 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*join(char const *s1, char const *s2, size_t l1, size_t l2)
 {
-	unsigned int	len1;
-	char			*res;
+	char	*j;
+	size_t	i;
 
-	if (!s1 || !s2)
+	if (!(j = (char*)malloc(sizeof(*j) * (l1 + l2 + 1))))
 		return (NULL);
-	len1 = ft_strlen(s1);
-	res = (char*)malloc(sizeof(*res) * (len1 + ft_strlen(s2) + 1));
-	if (!res)
+	j[l1 + l2] = '\0';
+	i = 0;
+	while (i < l1)
+	{
+		j[i] = (char)s1[i];
+		i++;
+	}
+	while (l2 > 0)
+	{
+		j[l1 + l2 - 1] = (char)s2[l2 - 1];
+		l2--;
+	}
+	return (j);
+}
+
+char		*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	l1;
+	size_t	l2;
+	char	*j;
+
+	l1 = 0;
+	l2 = 0;
+	if (s1 == NULL && s2 == NULL)
 		return (NULL);
-	ft_strcpy(res, s1);
-	ft_strcat(res, s2);
-	return (res);
+	if (s1 == NULL && s2 != NULL)
+		return (ft_strdup(s2));
+	if (s2 == NULL && s1 != NULL)
+		return (ft_strdup(s1));
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	j = join(s1, s2, l1, l2);
+	return (j);
 }

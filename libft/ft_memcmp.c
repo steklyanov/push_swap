@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 18:10:53 by mmraz             #+#    #+#             */
-/*   Updated: 2018/12/07 12:20:06 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/12 12:27:39 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/12 12:27:42 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int					ft_memcmp(const void *s1, const void *s2, size_t n)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*c_arr1;
-	unsigned char	*c_arr2;
+	unsigned char	*s_1;
+	unsigned char	*s_2;
 	size_t			i;
 
+	s_1 = (unsigned char*)s1;
+	s_2 = (unsigned char*)s2;
 	i = 0;
-	if (n == 0)
-		return (0);
-	c_arr1 = (unsigned char*)s1;
-	c_arr2 = (unsigned char*)s2;
-	while (*c_arr1 == *c_arr2 && ++i < n)
+	while (i < n)
 	{
-		c_arr1++;
-		c_arr2++;
+		if (s_1[i] != s_2[i])
+			return ((int)(s_1[i] - s_2[i]));
+		i++;
 	}
-	return ((int)*c_arr1 - *c_arr2);
+	return (0);
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_kill_list.c                                     :+:      :+:    :+:   */
+/*   ft_dlldelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 08:09:43 by mmraz             #+#    #+#             */
-/*   Updated: 2018/12/06 08:10:14 by mmraz            ###   ########.fr       */
+/*   Created: 2019/06/24 12:55:51 by uhand             #+#    #+#             */
+/*   Updated: 2019/06/24 12:57:38 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_kill_list(t_list *lst)
+void	ft_dlldelone(t_dllist **alst, void (*del)(void*, size_t))
 {
-	while (lst)
-	{
-		free(lst->content);
-		free(lst);
-		lst = lst->next;
-	}
+	if (!alst || !*alst || !del)
+		return ;
+	del(alst[0]->content, alst[0]->content_size);
+	free(alst[0]);
+	alst[0] = NULL;
 }

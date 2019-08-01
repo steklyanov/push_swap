@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 11:53:09 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/29 11:53:54 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/04 16:50:00 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/04 16:50:03 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	unsigned int	i;
+	size_t	i;
 
-	if (!s)
+	if (s == NULL)
 		return ;
 	i = 0;
 	while (s[i] != '\0')

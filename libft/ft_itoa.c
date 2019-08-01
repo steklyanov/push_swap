@@ -3,50 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 10:55:46 by mmraz             #+#    #+#             */
-/*   Updated: 2018/12/07 12:08:47 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/15 14:20:05 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/15 14:20:08 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(int n)
+static void	set_string(char **str, unsigned int num, int order, int i)
 {
-	int len;
-
-	len = 0;
-	len = (n <= 0 ? 1 : 0);
-	while (n != 0)
+	if (num == 0)
 	{
-		n = n / 10;
-		len++;
+		str[0][0] = '0';
+		return ;
 	}
-	return (len);
+	while (order > 0)
+	{
+		str[0][order + i - 1] = (num % 10) + 48;
+		num /= 10;
+		order--;
+	}
 }
 
 char		*ft_itoa(int n)
 {
-	unsigned int	nbr;
-	int				sign;
-	int				len;
-	char			*alpha;
+	char			*str;
+	unsigned int	num;
+	int				order;
 
-	sign = (n < 0 ? 1 : 0);
-	alpha = NULL;
-	len = ft_intlen(n);
-	nbr = (n < 0 ? -n : n);
-	if (!(alpha = (char *)malloc(sizeof(char) * len + 1)))
+	if (n < 0)
+		num = (unsigned int)(-n);
+	else
+		num = (unsigned int)n;
+	order = ft_order(num);
+	if (n < 0)
+		order++;
+	if (!(str = ft_strnew(order)))
 		return (NULL);
-	alpha[len--] = '\0';
-	while (len >= 0)
+	if (n < 0)
 	{
-		alpha[len] = nbr % 10 + '0';
-		nbr = nbr / 10;
-		len--;
+		str[0] = '-';
+		order--;
+		n = 1;
 	}
-	if (sign == 1)
-		alpha[0] = '-';
-	return (alpha);
+	else
+		n = 0;
+	set_string(&str, num, order, n);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/01 17:47:20 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/01 20:24:39 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft/libft.h"
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_stack t_stack;
 typedef struct s_solution t_solution;
@@ -39,7 +43,6 @@ struct		s_solution
 
 
 int		ft_atoi_small(const char *str);
-int     ft_isspace(char s);
 int		ft_isdigit(int c);
 void	ft_print_usage();
 int		ft_check_equal(t_stack *stack);
@@ -67,6 +70,9 @@ void	scenario_1(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_2(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_3(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_4(t_stack *stack_a, t_stack *stack_b, int index);
+int		stack_operation(char *line);
+void    validate_operations(char **argv, int index, t_stack *stack_a, t_stack *stack_b);
+void    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b);
 void    rotate_to_norme(t_stack *stack_a);
 // int		count_moves_to_put(t_stack *stack_a, t_stack *stack_b, int elem);
 t_stack	*allocate_memory(int len);

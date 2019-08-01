@@ -3,40 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 15:35:20 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/29 09:52:03 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/13 14:36:53 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/13 14:36:55 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static void	space_indexes(char const *s, size_t len, size_t *st, size_t *en)
 {
-	char			*new;
-	unsigned int	start;
-	unsigned int	len;
-	unsigned int	k;
+	*st = 0;
+	*en = len - 1;
+	while ((s[*st] == ' ' || s[*st] == '\n' || s[*st] == '\t') && *st < *en)
+		*st = *st + 1;
+	while ((s[*en] == ' ' || s[*en] == '\n' || s[*en] == '\t') && *en > *st)
+		*en = *en - 1;
+}
 
-	start = 0;
-	k = 0;
-	if (!s)
+static char	*make_trim(char const *s, size_t start, size_t end)
+{
+	char	*trim;
+	size_t	size;
+
+	size = end + 2 - start;
+	if (!(trim = (char*)malloc(sizeof(*trim) * (size))))
 		return (NULL);
-	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
-		start++;
-	if (s[start] == '\0')
-		return (ft_strcpy(ft_memalloc(sizeof(char) * 2), ""));
-	len = ft_strlen(s) - 1;
-	while (s[len] == ' ' || s[len] == '\n' || s[len] == '\t')
-		len--;
-	if (!(new = (char *)malloc(sizeof(char) * (len - start + 2))))
-		return (NULL);
-	while (k < len - start + 1)
+	trim[size - 1] = '\0';
+	while (size >= 2)
 	{
-		new[k] = s[start + k];
-		k++;
+		trim[size - 2] = (char)s[start + size - 2];
+		size--;
 	}
-	new[k] = '\0';
-	return (new);
+	return (trim);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	size_t	len;
+	size_t	start;
+	size_t	end;
+	char	*trim;
+
+	if (s == NULL)
+		return (NULL);
+	len = ft_strlen(s);
+	if (len == 0)
+		return (trim = ft_strnew(0));
+	space_indexes(s, len, &start, &end);
+	if (s[start] != ' ' && s[start] != '\n' && s[start] != '\t')
+		trim = make_trim(s, start, end);
+	else
+		trim = ft_strnew(0);
+	return (trim);
 }

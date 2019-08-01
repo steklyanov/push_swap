@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.h                                          :+:      :+:    :+:   */
+/*   ft_dlladdtoleft.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:33:23 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/21 15:12:56 by mmraz            ###   ########.fr       */
+/*   Created: 2019/06/24 13:14:38 by uhand             #+#    #+#             */
+/*   Updated: 2019/06/24 13:26:31 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIST_H
-# define FT_LIST_H
+#include "libft.h"
 
-#include <string.h>
-
-void	*ft_memset(void *b, int c, size_t len);
-void    ft_bzero(void *b, size_t len);
-
-#endif
+void	ft_lstaddtoleft(t_dllist **alst, t_dllist *new)
+{
+	if (!alst || !new || *alst)
+		return ;
+	new->right = *alst;
+	alst[0]->left = new;
+	*alst = new;
+}

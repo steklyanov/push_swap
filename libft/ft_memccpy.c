@@ -3,30 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 15:01:40 by mmraz             #+#    #+#             */
-/*   Updated: 2018/12/07 12:18:46 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/17 14:34:29 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/17 14:34:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
+	unsigned char	*c_dst;
+	unsigned char	*c_src;
+	unsigned char	chr;
 	size_t			i;
-	unsigned char	*ds;
-	unsigned char	*sc;
 
-	ds = (unsigned char*)dst;
-	sc = (unsigned char*)src;
+	if (n == 0)
+		return (NULL);
+	c_dst = (unsigned char*)dst;
+	c_src = (unsigned char*)src;
+	chr = (unsigned char)c;
 	i = 0;
-	while (i < n)
+	while (i < n && c_src[i] != chr)
 	{
-		ds[i] = sc[i];
-		if (ds[i] == (unsigned char)c)
-			return ((void *)(dst + i + 1));
+		c_dst[i] = c_src[i];
 		i++;
 	}
-	return (NULL);
+	if (i == n && c_dst[i - 1] != chr)
+		return (NULL);
+	c_dst[i] = c_src[i];
+	return (&c_dst[i + 1]);
 }

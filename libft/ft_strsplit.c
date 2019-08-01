@@ -3,84 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 09:52:45 by mmraz             #+#    #+#             */
-/*   Updated: 2018/12/10 18:55:59 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/13 19:06:31 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/13 19:06:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_wrds_cnt(char const *s, char c)
+static void		set_free(char ***arr, size_t x_i)
 {
-	int		index;
-	int		result;
+	size_t	i;
 
-	index = 0;
-	result = 0;
-	while (s[index])
+	i = 0;
+	while (i <= x_i)
 	{
-		while (s[index] == c)
-			index++;
-		if (s[index])
-			result++;
-		while (s[index] && (s[index] != c))
-			index++;
+		free(arr[0][i]);
+		i++;
 	}
-	return (result);
 }
 
-static char	*ft_strndup(const char *s, size_t n)
+static char		*set_string(char const *s, char c, size_t *s_i)
 {
 	char	*str;
+	size_t	len;
 
-	str = (char *)malloc(sizeof(char) * n + 1);
-	if (str == NULL)
-		return (NULL);
-	str = ft_strncpy(str, s, n);
-	str[n] = '\0';
+	len = 0;
+	while (s[*s_i] == c)
+		*s_i = *s_i + 1;
+	while (s[*s_i + len] != c && s[*s_i + len] != '\0')
+		len++;
+	str = ft_strsub(s, (unsigned int)*s_i, len);
+	*s_i = *s_i + len;
 	return (str);
 }
 
-static void	free_str(char **str)
+static char		**set_arr(char const *s, char c, size_t x)
 {
-	int		i;
+	size_t	s_i;
+	size_t	x_i;
+	char	**arr;
 
-	i = 0;
-	while (str[i])
+	s_i = 0;
+	x_i = 0;
+	if (!(arr = (char**)malloc(sizeof(char*) * (x + 1))))
+		return (NULL);
+	while (x_i < x)
 	{
-		free(str[i]);
-		i++;
+		if (!(arr[x_i] = set_string(s, c, &s_i)))
+		{
+			set_free(&arr, --x_i);
+			free(arr);
+			return (NULL);
+		}
+		x_i++;
 	}
-	free(*str);
+	arr[x] = NULL;
+	return (arr);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static size_t	str_calc(char const *s, char c)
 {
-	char	**result;
-	int		index;
-	int		j;
-	int		z;
+	size_t	i;
+	size_t	res;
 
-	index = 0;
-	j = 0;
-	z = 0;
-	if (!s || !c)
-		return (NULL);
-	if (!(result = (char **)malloc(sizeof(char *) * (get_wrds_cnt(s, c) + 1))))
-		return (NULL);
-	while (s[index])
+	i = 0;
+	res = 0;
+	if (!ft_strlen(s))
+		return (0);
+	while (s[i] != '\0')
 	{
-		while (s[index] == c)
-			index++;
-		j = index;
-		while (s[index] && s[index] != c)
-			index++;
-		if (index > j)
-			if (!(result[z++] = ft_strndup(s + j, index - j)))
-				free_str(result);
+		if (s[i] != c && s[i] != '\0')
+		{
+			res++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+		}
+		if (s[i] == '\0')
+			break ;
+		i++;
 	}
-	result[z] = 0;
-	return (result);
+	return (res);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**arr;
+	size_t	x;
+
+	if (s == NULL)
+		return (NULL);
+	if (!(x = str_calc(s, c)))
+	{
+		if (!(arr = (char**)malloc(sizeof(char*) * 1)))
+			return (NULL);
+		if (!(arr[0] = ft_strnew(0)))
+		{
+			free(arr);
+			return (NULL);
+		}
+	}
+	arr = set_arr(s, c, x);
+	return (arr);
 }

@@ -6,18 +6,11 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:50:21 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/22 18:15:47 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/01 18:32:42 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int     ft_isspace(char s)
-{
-    return (s == 32 || s == 10 || s == 9 || s == 12 ||
-			s == 13 || s == 11);
-}
-
 
 void    print_stack(t_stack *stack_a, t_stack *stack_b)
 {

@@ -3,32 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 13:59:13 by mmraz             #+#    #+#             */
-/*   Updated: 2018/11/26 19:53:00 by mmraz            ###   ########.fr       */
+/*   Created: 2018/12/06 14:18:23 by uhand             #+#    #+#             */
+/*   Updated: 2018/12/06 14:18:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *str1, const char *str2)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int	i;
-	int	j;
+	size_t	len_h;
+	size_t	len_n;
+	size_t	i;
+	char	*addr;
 
+	len_h = ft_strlen(haystack);
+	len_n = ft_strlen(needle);
 	i = 0;
-	if (str2[0] == '\0')
-		return ((char*)str1);
-	while (str1[i] != '\0')
+	addr = (char*)haystack;
+	if (len_n == 0)
+		return (addr);
+	if (len_n > len_h)
+		return (NULL);
+	while (i <= (len_h - len_n))
 	{
-		j = 0;
-		while (str1[i + j] == str2[j])
-		{
-			if (str2[j + 1] == '\0')
-				return ((char*)&str1[i]);
-			j++;
-		}
+		if (haystack[i] == needle[0])
+			if (ft_strnequ(&(addr[i]), needle, len_n))
+				return (&(addr[i]));
 		i++;
 	}
 	return (NULL);
