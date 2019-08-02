@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/01 21:42:22 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 18:08:34 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int main(int argc, char **argv)
         else
         {
             stack_a = ft_strsplit_to_int(result);
+            if (!stack_a)
+                return (0);
             if (ft_check_equal(stack_a))
             {
                 stack_b = allocate_memory(stack_a->len);
@@ -44,17 +46,20 @@ int main(int argc, char **argv)
 
 void    main_operations(t_stack *stack_a, t_stack *stack_b)
 {
-    push_to_second_stack(stack_a, stack_b);
-    sort_three(stack_a);
-    dealer(stack_a, stack_b);
-    print_stack(stack_a, stack_b);
+    if (check_sorting(stack_a, stack_b) != 2)
+    {
+        push_to_second_stack(stack_a, stack_b);
+        sort_three(stack_a);
+        dealer(stack_a, stack_b);
+    }
+
 }
 
 char    *return_stack_string(int argc, char **argv)
 {
     char *result;
     int index;
-    // char *tmp;
+    char **tmp;
 
     index  = 1;
     result = ft_strnew(0);
@@ -63,10 +68,11 @@ char    *return_stack_string(int argc, char **argv)
         if (validate(argv[index]))
         {
             //  Возможно нужно ft_strnew сделать внутри и после каждой операции делать ft_memdel;
-            result = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]), str_calc(argv[index])));
+            tmp = ft_strsplitspaces(argv[index]);
+            result = ft_strjoin(result, ft_arrjoin(tmp, str_calc(argv[index])));
             result = ft_strjoin(result, " ");
             // result = tmp;
-            // free(tmp);
+            free(tmp);
         }
         else
         {

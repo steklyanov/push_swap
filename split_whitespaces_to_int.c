@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 17:55:14 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/22 18:15:35 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 17:06:25 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_stack	    	*ft_strsplit_to_int(char const *s)
 	int		index;
 	int		z;
 	int		len;
+	long long int tmp;
 
 	index = 0;
 	z = 0;
@@ -49,7 +50,17 @@ t_stack	    	*ft_strsplit_to_int(char const *s)
 	{
 		if (s[index] == ' ')
 			index++;
-        result->stack[z++] = ft_atoi_small(&s[index]);
+		tmp = ft_atoi_small(&s[index]);
+		// printf("%lld\n", tmp);
+		// printf("%d\n", (int)tmp);
+		if (tmp == (int)tmp)
+			result->stack[z++] = tmp;
+		else
+		{
+			ft_printf("Error\n");
+			exit (0);
+		}
+
 		while (s[index] && s[index] != ' ')
 			index++;
 	}

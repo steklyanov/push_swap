@@ -6,33 +6,33 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:37:58 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/18 17:52:48 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 16:56:21 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_atoi_small(const char *str)
+long long int		ft_atoi_small(const char *str)
 {
-	int			i;
-	int			isneg;
-	long long	result;
-	long long	tmp;
+	size_t			i;
+	long long int	numb;
+	int				sign;
 
 	i = 0;
-	result = 0;
-	isneg = 1;
-	if (str[i] == '-')
-		isneg = -1;
-	if (str[i] == '-' || str[i] == '+')
+	numb = 0;
+	sign = 1;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+			|| str[i] == '\r' || str[i] == '\f')
 		i++;
-	while (ft_isdigit(str[i]))
+	if (str[i] == '-' || str[i] == '+')
 	{
-		tmp = result;
-		result = result * 10 + (str[i] - 48);
-		if (tmp > result)
-			return (isneg == -1 ? 0 : -1);
+		sign = (str[i] == '-') ? -1 : 1;
 		i++;
 	}
-	return (isneg * (int)result);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		numb = (numb * 10) + str[i] - 48;
+		i++;
+	}
+	return (numb * sign);
 }

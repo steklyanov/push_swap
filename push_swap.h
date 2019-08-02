@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 15:24:38 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 16:56:40 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ struct		s_solution
 };
 
 
-int		ft_atoi_small(const char *str);
+long long int		ft_atoi_small(const char *str);
 int		ft_isdigit(int c);
 void	ft_print_usage();
 int		ft_check_equal(t_stack *stack);

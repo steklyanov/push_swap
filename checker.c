@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 15:42:22 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 16:31:21 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ char    *return_stack_string_2(int argc, char **argv)
             // free(tmp);
         }
         else
+        {
+            free(result);
+            result = ft_strnew(1);
             break;
+        }
+
         index++;
     }
-
     return (result);
 }
 
@@ -44,40 +48,31 @@ int main(int argc, char **argv)
     t_stack *stack_a;
     t_stack *stack_b;
 
-    result = return_stack_string_2(argc, argv);
-    if (ft_strlen(result) == 1 && result[0] == '\0')
-        printf("Error\n");
-    else
+    if (argc > 1)
     {
-        stack_a = ft_strsplit_to_int(result);
-        if (ft_check_equal(stack_a))
-        {
-            stack_b = allocate_memory(stack_a->len);
-            stack_b->len = 0;
-            if (validate_operations(stack_a, stack_b))
-            {
-                if (check_sorting(stack_a, stack_b) == 2)
-                    ft_printf("OK\n");
-                else
-                    ft_printf("KO\n");
-            }
-        }
-        else
+        result = return_stack_string_2(argc, argv);
+        if (ft_strlen(result) == 0 && result[0] == '\0')
             printf("Error\n");
+        else
+        {
+            stack_a = ft_strsplit_to_int(result);
+            if (ft_check_equal(stack_a))
+            {
+                stack_b = allocate_memory(stack_a->len);
+                stack_b->len = 0;
+                if (validate_operations(stack_a, stack_b))
+                {
+                    if (check_sorting(stack_a, stack_b) == 2)
+                        ft_printf("OK\n");
+                    else
+                        ft_printf("KO\n");
+                }
+            }
+            else
+                printf("Error\n");
+        }
     }
     return (0);
-}
-
-int     check_sorting(t_stack *stack_a, t_stack *stack_b)
-{
-    int index;
-
-    index = 0;
-    if (stack_b->len != 0)
-        return (1);
-    while(index < stack_a->len - 2 && stack_a->stack[index] < stack_a->stack[index + 1])
-        index++;
-    return (stack_a->len - index);
 }
 
 int    validate_operations(t_stack *stack_a, t_stack *stack_b)
@@ -97,7 +92,6 @@ int    validate_operations(t_stack *stack_a, t_stack *stack_b)
 
 int    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b)
 {
-    printf("%s", line);
     if (!ft_strcmp(line, "sa"))
         swap_one(stack_a, 1);
     else if (!ft_strcmp(line, "sb"))
