@@ -6,20 +6,17 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 15:00:22 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 15:42:22 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#define BUF_SIZE 4
 
-void    return_stack_string_2(int argc, char **argv)
+char    *return_stack_string_2(int argc, char **argv)
 {
     char *result;
     int index;
     char *tmp;
-    t_stack *stack_a;
-    t_stack *stack_b;
 
     index  = 1;
     result = ft_strnew(1);
@@ -37,6 +34,17 @@ void    return_stack_string_2(int argc, char **argv)
             break;
         index++;
     }
+
+    return (result);
+}
+
+int main(int argc, char **argv)
+{
+    char *result;
+    t_stack *stack_a;
+    t_stack *stack_b;
+
+    result = return_stack_string_2(argc, argv);
     if (ft_strlen(result) == 1 && result[0] == '\0')
         printf("Error\n");
     else
@@ -46,19 +54,31 @@ void    return_stack_string_2(int argc, char **argv)
         {
             stack_b = allocate_memory(stack_a->len);
             stack_b->len = 0;
-            validate_operations(stack_a, stack_b);
+            if (validate_operations(stack_a, stack_b))
+            {
+                if (check_sorting(stack_a, stack_b) == 2)
+                    ft_printf("OK\n");
+                else
+                    ft_printf("KO\n");
+            }
         }
         else
             printf("Error\n");
     }
-}
-
-int main(int argc, char **argv)
-{
-    return_stack_string_2(argc, argv);
     return (0);
 }
 
+int     check_sorting(t_stack *stack_a, t_stack *stack_b)
+{
+    int index;
+
+    index = 0;
+    if (stack_b->len != 0)
+        return (1);
+    while(index < stack_a->len - 2 && stack_a->stack[index] < stack_a->stack[index + 1])
+        index++;
+    return (stack_a->len - index);
+}
 
 int    validate_operations(t_stack *stack_a, t_stack *stack_b)
 {
@@ -66,24 +86,13 @@ int    validate_operations(t_stack *stack_a, t_stack *stack_b)
 
 	while (get_next_line(0, &line) > 0)
 	{
-        printf(" while gnl line = %s\n", line);
         if (!exec_operation(line, stack_a, stack_b))
         {
             printf("Error!");
             return (0);
         }
-        print_stack(stack_a, stack_b);
 	}
 	return (1);
-}
-
-int    stack_operation(char *line)
-{
-    if (!ft_strcmp(line, "sa\n") || !ft_strcmp(line, "sb\n") || !ft_strcmp(line, "ss\n") || !ft_strcmp(line, "pa\n") ||
-    !ft_strcmp(line, "pb\n") || !ft_strcmp(line, "ra\n") || !ft_strcmp(line, "rb\n") || !ft_strcmp(line, "rr\n") ||
-    !ft_strcmp(line, "rra\n") || !ft_strcmp(line, "rrb\n") || !ft_strcmp(line, "rrr\n"))
-        return (1);
-    return (0);
 }
 
 int    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b)
@@ -104,7 +113,7 @@ int    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b)
     else if (!ft_strcmp(line, "rb"))
         rotate(stack_b, 1);
     else if (!ft_strcmp(line, "rr"))
-        reverse_rotate(stack_a, 1);
+        rotate_both(stack_a, stack_b, 1);
     else if (!ft_strcmp(line, "rra"))
         reverse_rotate(stack_a, 1);
     else if (!ft_strcmp(line, "rrb"))

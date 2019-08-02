@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 15:01:13 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 13:31:35 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 15:24:38 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	scenario_1(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_2(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_3(t_stack *stack_a, t_stack *stack_b, int index);
 void	scenario_4(t_stack *stack_a, t_stack *stack_b, int index);
-void    return_stack_string_2(int argc, char **argv);
-int		stack_operation(char *line);
+int     check_sorting(t_stack *stack_a, t_stack *stack_b);
+char    *return_stack_string_2(int argc, char **argv);
 int    validate_operations(t_stack *stack_a, t_stack *stack_b);
 int    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b);
 void    rotate_to_norme(t_stack *stack_a);
