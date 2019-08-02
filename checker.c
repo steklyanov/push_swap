@@ -6,12 +6,12 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/01 20:56:39 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 15:00:22 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+#define BUF_SIZE 4
 
 void    return_stack_string_2(int argc, char **argv)
 {
@@ -46,7 +46,7 @@ void    return_stack_string_2(int argc, char **argv)
         {
             stack_b = allocate_memory(stack_a->len);
             stack_b->len = 0;
-            validate_operations(argv, index, stack_a, stack_b);
+            validate_operations(stack_a, stack_b);
         }
         else
             printf("Error\n");
@@ -59,59 +59,59 @@ int main(int argc, char **argv)
     return (0);
 }
 
-void    validate_operations(char **argv, int index, t_stack *stack_a, t_stack *stack_b)
+
+int    validate_operations(t_stack *stack_a, t_stack *stack_b)
 {
-    int     fd;
-    char    *line;
+    char *line;
 
-    fd = open(argv[index], O_RDONLY);
-
-    while (get_next_line(fd, &line))
-    {
-        ft_printf("here");
-        if (line[0] == '\n')
-            break;
-        if (stack_operation(line) != 0)
-            exec_operation(line, stack_a, stack_b);
-        else
+	while (get_next_line(0, &line) > 0)
+	{
+        printf(" while gnl line = %s\n", line);
+        if (!exec_operation(line, stack_a, stack_b))
         {
-            ft_printf("Error\n");
-            break;
+            printf("Error!");
+            return (0);
         }
-    }
+        print_stack(stack_a, stack_b);
+	}
+	return (1);
 }
 
 int    stack_operation(char *line)
 {
-    if (ft_strcmp(line, "sa\n") || ft_strcmp(line, "sb\n") || ft_strcmp(line, "ss\n") || ft_strcmp(line, "pa\n") ||
-    ft_strcmp(line, "pb\n") || ft_strcmp(line, "ra\n") || ft_strcmp(line, "rb\n") || ft_strcmp(line, "rr\n") ||
-    ft_strcmp(line, "rra\n") || ft_strcmp(line, "rrb\n") || ft_strcmp(line, "rrr\n"))
+    if (!ft_strcmp(line, "sa\n") || !ft_strcmp(line, "sb\n") || !ft_strcmp(line, "ss\n") || !ft_strcmp(line, "pa\n") ||
+    !ft_strcmp(line, "pb\n") || !ft_strcmp(line, "ra\n") || !ft_strcmp(line, "rb\n") || !ft_strcmp(line, "rr\n") ||
+    !ft_strcmp(line, "rra\n") || !ft_strcmp(line, "rrb\n") || !ft_strcmp(line, "rrr\n"))
         return (1);
     return (0);
 }
 
-void    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b)
+int    exec_operation(char *line, t_stack *stack_a, t_stack *stack_b)
 {
-    if (ft_strcmp(line, "sa\n"))
+    printf("%s", line);
+    if (!ft_strcmp(line, "sa"))
         swap_one(stack_a, 1);
-    else if (ft_strcmp(line, "sb\n"))
+    else if (!ft_strcmp(line, "sb"))
         swap_one(stack_b, 1);
-    else if (ft_strcmp(line, "ss\n"))
+    else if (!ft_strcmp(line, "ss"))
         swap_both(stack_a, stack_b, 1);
-    else if (ft_strcmp(line, "pa\n"))
+    else if (!ft_strcmp(line, "pa"))
         push_to(stack_a, stack_b);
-    else if (ft_strcmp(line, "pb\n"))
+    else if (!ft_strcmp(line, "pb"))
         push_to(stack_b, stack_a);
-    else if (ft_strcmp(line, "ra\n"))
+    else if (!ft_strcmp(line, "ra"))
         rotate(stack_a, 1);
-    else if (ft_strcmp(line, "rb\n"))
+    else if (!ft_strcmp(line, "rb"))
         rotate(stack_b, 1);
-    else if (ft_strcmp(line, "rr\n"))
+    else if (!ft_strcmp(line, "rr"))
         reverse_rotate(stack_a, 1);
-    else if (ft_strcmp(line, "rra\n"))
+    else if (!ft_strcmp(line, "rra"))
+        reverse_rotate(stack_a, 1);
+    else if (!ft_strcmp(line, "rrb"))
         reverse_rotate(stack_b, 1);
-    else if (ft_strcmp(line, "rrb\n"))
-        reverse_rotate(stack_b, 1);
-    else if (ft_strcmp(line, "rrr\n"))
+    else if (!ft_strcmp(line, "rrr"))
         reverse_rotate_both(stack_a, stack_b, 1);
+    else
+        return (0);
+    return (1);
 }
