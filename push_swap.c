@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 18:08:34 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/02 19:03:59 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,45 +60,23 @@ char    *return_stack_string(int argc, char **argv)
     char *result;
     int index;
     char **tmp;
+    char *tmp2;
+    char *tmp3;
 
     index  = 1;
-    result = ft_strnew(0);
+    tmp2 = ft_strnew(0);
     while(argc > index)
     {
         if (validate(argv[index]))
         {
             //  Возможно нужно ft_strnew сделать внутри и после каждой операции делать ft_memdel;
             tmp = ft_strsplitspaces(argv[index]);
-            result = ft_strjoin(result, ft_arrjoin(tmp, str_calc(argv[index])));
-            result = ft_strjoin(result, " ");
-            // result = tmp;
-            free(tmp);
-        }
-        else
-        {
-            printf("error\n");
-            return (0);
-        }
-        index++;
-    }
-    return (result);
-}
-
-char        *concat_all(int argc, char **argv)
-{
-    char    *result;
-    int     index;
-    char    *tmp;
-
-    index  = 1;
-    result = ft_strnew(1);
-    while(argc > index)
-    {
-        if (validate(argv[index]))
-        {
-            tmp = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]), str_calc(argv[index])));
+            tmp3 = ft_arrjoin(tmp, str_calc(argv[index]));
+            result = ft_strjoin(tmp2, tmp3);
+            free(tmp2);
+            free(tmp3);
+            tmp2 = ft_strjoin(result, " ");
             free(result);
-            result = tmp;
             free(tmp);
         }
         else
@@ -108,5 +86,5 @@ char        *concat_all(int argc, char **argv)
         }
         index++;
     }
-    return (result);
+    return (tmp2);
 }
