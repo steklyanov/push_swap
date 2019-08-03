@@ -6,7 +6,7 @@
 #    By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/18 16:56:08 by mmraz             #+#    #+#              #
-#    Updated: 2019/08/02 16:19:04 by mmraz            ###   ########.fr        #
+#    Updated: 2019/08/03 12:23:53 by mmraz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ FLAGS = -g -Wall -Werror -Wextra
 
 INCLUDES = ./includes/
 
-SRC =	check_sorting.c algorithm.c operations_2.c operations.c push_swap_f.c \
+SRC =	check_sorting.c algorithm.c algorithm2.c operations_2.c operations.c push_swap_f.c \
 		validation.c arrjoin.c str_splitspaces.c \
 		split_whitespaces_to_int.c ft_atoi_small.c scenarios.c push_swap.c
-SRC2 =	check_sorting.c algorithm.c operations_2.c operations.c push_swap_f.c \
+SRC2 =	check_sorting.c algorithm.c algorithm2.c operations_2.c operations.c push_swap_f.c \
 		validation.c arrjoin.c str_splitspaces.c \
 		split_whitespaces_to_int.c ft_atoi_small.c scenarios.c checker.c						
 

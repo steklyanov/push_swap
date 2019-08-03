@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 17:55:14 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/02 18:55:04 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/03 18:12:22 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static int	get_wrds_cnt(char const *s)
 	return (result);
 }
 
-t_stack	    	*ft_strsplit_to_int(char const *s)
+t_stack		*ft_strsplit_to_int(char const *s)
 {
-	t_stack	*result;
-	int		index;
-	int		z;
-	int		len;
-	long long int tmp;
+	t_stack			*result;
+	int				index;
+	int				z;
+	int				len;
+	long long int	tmp;
 
 	index = 0;
 	z = 0;
@@ -51,16 +51,14 @@ t_stack	    	*ft_strsplit_to_int(char const *s)
 		if (s[index] == ' ')
 			index++;
 		tmp = ft_atoi_small(&s[index]);
-		// printf("%lld\n", tmp);
-		// printf("%d\n", (int)tmp);
 		if (tmp == (int)tmp)
 			result->stack[z++] = tmp;
 		else
 		{
-			ft_printf("Error\n");
-			exit (0);
+			free(result->stack);
+			free(result);
+			return(0);
 		}
-
 		while (s[index] && s[index] != ' ')
 			index++;
 	}
@@ -71,9 +69,9 @@ t_stack		*allocate_memory(int len)
 {
 	t_stack	*result;
 
-	if (!(result = malloc(sizeof(t_stack))))
+	if (!(result = (t_stack*)malloc(sizeof(t_stack))))
 		return (NULL);
-	if (!(result->stack = (int *)malloc(sizeof(int *) * len)))
+	if (!(result->stack = (int *)malloc(sizeof(int) * len)))
 		return (NULL);
 	result->len = len;
 	return (result);

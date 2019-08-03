@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplitspaces.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 19:06:31 by uhand             #+#    #+#             */
-/*   Updated: 2019/05/28 19:05:08 by uhand            ###   ########.fr       */
+/*   Updated: 2019/08/03 12:12:39 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char		**set_arr(char const *s, size_t x)
 		x_i++;
 	}
 	arr[x] = NULL;
+	
 	return (arr);
 }
 
