@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 12:22:43 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 14:36:54 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:46:07 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	rotate_to_norme(t_stack *stack_a)
 	int index;
 
 	index = 0;
-	while (index < stack_a->len)
+	while (index < stack_a->len - 1)
 	{
 		if (stack_a->stack[index] > stack_a->stack[index + 1])
 			break ;
 		index++;
 	}
 	index++;
-	if (stack_a->len == index - 1)
+	if (stack_a->len == index)
 		;
 	else if (stack_a->len / index > 0.5)
 	{

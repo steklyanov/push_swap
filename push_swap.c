@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 14:27:24 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:46:32 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(int argc, char **argv)
 	{
 		result = return_stack_string(argc, argv);
 		if (ft_strlen(result) == 0)
-			printf("Error\n");
+			ft_printf("Error\n");
 		else
 		{
 			stack_a = ft_strsplit_to_int(result);

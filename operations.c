@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:46:34 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 12:50:43 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:45:08 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	swap_one(t_stack *stack_a, int rep)
 
 	if (rep)
 	{
-		if (stack_a->stack[0] && stack_a->stack[1])
+		if (stack_a->len > 1)
 		{
 			tmp_a = stack_a->stack[0];
 			stack_a->stack[0] = stack_a->stack[1];

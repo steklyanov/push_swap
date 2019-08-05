@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 14:40:50 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 15:17:06 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int argc, char **argv)
 	{
 		result = return_stack_string_2(argc, argv);
 		if (ft_strlen(result) == 0 && result[0] == '\0')
-			printf("Error\n");
+			ft_printf("Error\n");
 		else
 		{
 			stack_a = ft_strsplit_to_int(result);
@@ -55,7 +55,7 @@ int		main(int argc, char **argv)
 				sort_stack(stack_a);
 			}
 			else
-				printf("Error\n");
+				ft_printf("Error\n");
 			free(stack_a->stack);
 			free(stack_a);
 		}
@@ -88,7 +88,7 @@ int		validate_operations(t_stack *stack_a, t_stack *stack_b)
 		index = 1;
 		if (!exec_operation(line, stack_a, stack_b))
 		{
-			printf("Error\n");
+			ft_printf("Error\n");
 			free(line);
 			return (0);
 		}

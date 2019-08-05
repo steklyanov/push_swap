@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 18:29:48 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 14:30:58 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:51:30 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	sort_half(int result, t_stack *stack_a)
 	}
 	else if (result == 2)
 	{
+		reverse_rotate(stack_a, 1);
 		swap_one(stack_a, 1);
-		rotate(stack_a, 1);
+		ft_print("rra\n", 1);
 		ft_print("sa\n", 1);
-		ft_print("ra\n", 1);
 	}
 	else if (result == 3)
 	{

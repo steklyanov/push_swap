@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:01:19 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 14:11:02 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 15:17:04 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_print(char *comma, int rep)
 {
 	while (rep--)
 	{
-		printf("%s", comma);
+		ft_printf("%s", comma);
 	}
 }
 

@@ -1,57 +1,37 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/07/18 16:56:08 by mmraz             #+#    #+#              #
-#    Updated: 2019/08/03 12:23:53 by mmraz            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+LIB_PATH = libft
 
-NAME = push_swap
-NAME2 = checker
-
-CC = gcc $(FLAGS)
-
-FLAGS = -g -Wall -Werror -Wextra
-
-INCLUDES = ./includes/
-
-SRC =	check_sorting.c algorithm.c algorithm2.c operations_2.c operations.c push_swap_f.c \
+SRC = 	check_sorting.c algorithm.c algorithm2.c operations_2.c operations.c \
 		validation.c arrjoin.c str_splitspaces.c \
-		split_whitespaces_to_int.c ft_atoi_small.c scenarios.c push_swap.c
-SRC2 =	check_sorting.c algorithm.c algorithm2.c operations_2.c operations.c push_swap_f.c \
-		validation.c arrjoin.c str_splitspaces.c \
-		split_whitespaces_to_int.c ft_atoi_small.c scenarios.c checker.c						
+		split_whitespaces_to_int.c ft_atoi_small.c scenarios.c
 
 OBJ = $(SRC:.c=.o)
-OBJ2 = $(SRC2:.c=.o)
 
-all: $(NAME) $(NAME2)
+INC = 	push_swap.h \
+		$(LIB_PATH)/includes/libft.h
 
-$(NAME): $(OBJ)
-	make -C ./libft/
-	$(CC) -I$(INCLUDES) -c $(SRC)
-	$(CC) $^ -L./libft/ -lft -o $@
+FLAGS = -Wall -Wextra -Werror
 
-$(NAME2): $(OBJ2)
-	make -C ./libft/
-	$(CC) -I$(INCLUDES) -c $(SRC2)
-	$(CC) $^ -L./libft/ -lft -o $@
+all: checker push_swap
 
-%.o: %.c
-	@$(CC) -o $@ -c $<
+checker : checker.o $(OBJ) $(LIB_PATH)/libft.a
+	gcc -o checker checker.o $(OBJ) $(FLAGS) -L $(LIB_PATH) -lft
+
+push_swap : push_swap.o $(OBJ) $(LIB_PATH)/libft.a
+	gcc -o push_swap push_swap.o $(OBJ) $(FLAGS) -L $(LIB_PATH) -lft
+
+$(LIB_PATH)/libft.a: $(LIB_PATH)/Makefile $(LIB_PATH)/libft.h
+	@make -C $(LIB_PATH)/ fclean && make -C $(LIB_PATH)
+	@echo "libft created"
+
+%.o: %.c $(INC)
+	gcc -o $@ -c $< $(FLAGS) -I $(LIB_PATH)/
 
 clean:
-	make clean -C ./libft/
-	rm -f $(OBJ) $(OBJ2)
+	make -C $(LIB_PATH)/ clean
+	rm -f $(OBJ) checker.o push_swap.o 
 
 fclean: clean
-	make fclean -C ./libft/
-	rm -f $(NAME) $(NAME2)
+	make -C $(LIB_PATH)/ fclean
+	rm -f checker push_swap 
 
-re: fclean all clean
-
-.PHONY: all, clean, fclean, re
+re: fclean all
