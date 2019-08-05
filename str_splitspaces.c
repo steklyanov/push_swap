@@ -6,13 +6,13 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:17:36 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 17:16:23 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:10:25 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		set_free(char ***arr, size_t x_i)
+static void	set_free(char ***arr, size_t x_i)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ static void		set_free(char ***arr, size_t x_i)
 	}
 }
 
-static char		*set_string(char const *s, size_t *s_i)
+static char	*set_string(char const *s, size_t *s_i)
 {
 	char	*str;
 	size_t	len;
@@ -39,7 +39,7 @@ static char		*set_string(char const *s, size_t *s_i)
 	return (str);
 }
 
-static char		**set_arr(char const *s, size_t x)
+static char	**set_arr(char const *s, size_t x)
 {
 	size_t	s_i;
 	size_t	x_i;
@@ -87,7 +87,7 @@ size_t		str_calc(char const *s)
 	return (res);
 }
 
-char			**ft_strsplitspaces(char const *s)
+char		**ft_strsplitspaces(char const *s)
 {
 	char	**arr;
 	size_t	x;

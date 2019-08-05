@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:41:47 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 18:11:11 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:27:24 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ int		main(int argc, char **argv)
 			printf("Error\n");
 		else
 		{
-			if (!(stack_a = ft_strsplit_to_int(result)))
+			stack_a = ft_strsplit_to_int(result);
+			if (stack_a->len == 0)
 				ft_printf("Error\n");
 			else if (ft_check_equal(stack_a))
 				main_operations(stack_a);
 			else
 				ft_printf("Error\n");
-			(stack_a) ? free(stack_a->stack): ft_printf(""); 
+			free(stack_a->stack);
 			free(stack_a);
 		}
 		free(result);
@@ -41,10 +42,10 @@ int		main(int argc, char **argv)
 void	main_operations(t_stack *stack_a)
 {
 	t_stack *stack_b;
-	
+
 	stack_b = allocate_memory(stack_a->len);
 	stack_b->len = 0;
-	if (check_sorting(stack_a, stack_b) != 2)
+	if (check_sorting(stack_a, stack_b) != 1)
 	{
 		push_to_second_stack(stack_a, stack_b);
 		sort_three(stack_a);
@@ -52,19 +53,6 @@ void	main_operations(t_stack *stack_a)
 	}
 	free(stack_b->stack);
 	free(stack_b);
-}
-
-static void	free_str(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
 }
 
 char	*return_stack_string(int argc, char **argv)
@@ -84,7 +72,7 @@ char	*return_stack_string(int argc, char **argv)
 			;
 		free(result);
 		result = ft_arrjoin(tmp2, index - 1);
-		free_str(tmp2);
+		free_string(tmp2);
 	}
 	free(tmp);
 	return (result);

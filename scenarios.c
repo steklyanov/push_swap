@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:01:19 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 13:28:40 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:11:02 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print(char *comma, int rep)
 {
-	while(rep--)
+	while (rep--)
 	{
 		printf("%s", comma);
 	}
@@ -53,7 +53,7 @@ void	scenario_2(t_stack *stack_a, t_stack *stack_b, int index)
 	rrb = stack_b->len - index;
 	repeat = (rrb < rra) ? rrb : rra;
 	reverse_rotate_both(stack_a, stack_b, repeat);
-	ft_print("rrr\n",repeat);
+	ft_print("rrr\n", repeat);
 	if (rrb < rra)
 	{
 		reverse_rotate(stack_a, rra - rrb);
@@ -95,4 +95,3 @@ void	scenario_4(t_stack *stack_a, t_stack *stack_b, int index)
 	push_to(stack_a, stack_b);
 	ft_print("pa\n", 1);
 }
-

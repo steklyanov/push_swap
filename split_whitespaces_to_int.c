@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 17:55:14 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 18:12:22 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:08:03 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,18 @@ t_stack		*ft_strsplit_to_int(char const *s)
 
 	index = 0;
 	z = 0;
-	if (!s)
-		return (NULL);
 	len = get_wrds_cnt(s);
 	result = allocate_memory(len);
 	while (s[index])
 	{
-		if (s[index] == ' ')
-			index++;
+		s[index] == ' ' ? index++ : ft_printf("");
 		tmp = ft_atoi_small(&s[index]);
 		if (tmp == (int)tmp)
 			result->stack[z++] = tmp;
 		else
 		{
-			free(result->stack);
-			free(result);
-			return(0);
+			result->len = 0;
+			return (result);
 		}
 		while (s[index] && s[index] != ' ')
 			index++;

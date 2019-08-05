@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 13:14:32 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:40:50 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,21 @@ char	*return_stack_string_2(int argc, char **argv)
 	char	*result;
 	int		index;
 	char	*tmp;
+	char	**tmp2;
 
-	index = 1;
-	result = ft_strnew(1);
-	while (argc > index)
+	index = 0;
+	tmp = ft_arrjoin(&argv[1], argc - 1);
+	result = ft_strnew(0);
+	if (validate(tmp))
 	{
-		if (validate(argv[index]))
-		{
-			tmp = ft_strjoin(result, ft_arrjoin(ft_strsplitspaces(argv[index]),
-			str_calc(argv[index])));
-			tmp = ft_strjoin(tmp, " ");
-			result = tmp;
-		}
-		else
-		{
-			free(result);
-			result = ft_strnew(1);
-			break ;
-		}
-		index++;
+		tmp2 = ft_strsplitspaces(tmp);
+		while (tmp2[index++])
+			;
+		free(result);
+		result = ft_arrjoin(tmp2, index - 1);
+		free_string(tmp2);
 	}
+	free(tmp);
 	return (result);
 }
 
@@ -53,13 +48,18 @@ int		main(int argc, char **argv)
 		else
 		{
 			stack_a = ft_strsplit_to_int(result);
-			if (ft_check_equal(stack_a))
+			if (stack_a->len == 0)
+				ft_printf("Error\n");
+			else if (ft_check_equal(stack_a))
 			{
 				sort_stack(stack_a);
 			}
 			else
 				printf("Error\n");
+			free(stack_a->stack);
+			free(stack_a);
 		}
+		free(result);
 	}
 	return (0);
 }
@@ -71,22 +71,30 @@ void	sort_stack(t_stack *stack_a)
 	stack_b = allocate_memory(stack_a->len);
 	stack_b->len = 0;
 	if (validate_operations(stack_a, stack_b))
-		check_sorting(stack_a, stack_b) == 2 ?
+		check_sorting(stack_a, stack_b) == 1 ?
 		ft_printf("OK\n") : ft_printf("KO\n");
+	free(stack_b->stack);
+	free(stack_b);
 }
 
 int		validate_operations(t_stack *stack_a, t_stack *stack_b)
 {
-	char *line;
+	char	*line;
+	int		index;
 
+	index = 0;
 	while (get_next_line(0, &line) > 0)
 	{
+		index = 1;
 		if (!exec_operation(line, stack_a, stack_b))
 		{
-			printf("Error!");
+			printf("Error\n");
+			free(line);
 			return (0);
 		}
 	}
+	if (index)
+		free(line);
 	return (1);
 }
 

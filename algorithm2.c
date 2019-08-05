@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 12:22:43 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/03 12:37:36 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:36:54 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	rotate_to_norme(t_stack *stack_a)
 		index++;
 	}
 	index++;
-	if (stack_a->len / index > 0.5)
+	if (stack_a->len == index - 1)
+		;
+	else if (stack_a->len / index > 0.5)
 	{
 		reverse_rotate(stack_a, stack_a->len - index);
 		ft_print("rra\n", stack_a->len - index);

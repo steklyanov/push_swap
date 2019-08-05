@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:57:57 by mmraz             #+#    #+#             */
-/*   Updated: 2019/07/22 18:15:50 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/05 14:26:24 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@ int		validate(char *str)
 	{
 		if (!(ft_isdigit(str[index]) || ft_isspace(str[index]) ||
 			((str[index] == '-' || str[index] == '+')
-			&& ft_isdigit(str[index + 1]))))
+			&& ft_isdigit(str[index + 1]) && (index == 0 ||
+			ft_isspace(str[index - 1])))))
 			return (0);
 		index++;
 	}
 	return (1);
 }
 
-void	ft_print_usage()
+void	free_string(char **str)
 {
-	
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 int		ft_check_equal(t_stack *stack)
@@ -42,10 +51,10 @@ int		ft_check_equal(t_stack *stack)
 	while (index < stack->len)
 	{
 		loop = 0;
-		while(loop < index)
+		while (loop < index)
 		{
 			if (stack->stack[index] == stack->stack[loop++])
-			return (0);
+				return (0);
 		}
 		index++;
 	}
