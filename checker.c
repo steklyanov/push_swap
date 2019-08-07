@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:43:32 by mmraz             #+#    #+#             */
-/*   Updated: 2019/08/05 15:17:06 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/08/07 17:21:57 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ int		validate_operations(t_stack *stack_a, t_stack *stack_b)
 			free(line);
 			return (0);
 		}
-	}
-	if (index)
 		free(line);
+	}
 	return (1);
 }
 
